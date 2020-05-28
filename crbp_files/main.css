@@ -261,3 +261,35 @@ div.anchor {
         text-align: left
     }
 }
+
+    .auth-name {
+        color: #931F21;
+    }
+
+    .email {
+        color: #931F21;
+    }
+
+    .rowimg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .columnimg {
+        display: inline-block;
+        padding: 5px;
+        margin: 10px;
+
+    }
+
+    .masonry-ite {
+        margin-bottom: 10px;
+        width: 20%;
+
+    }
+
+    .masonry-cont {
+margin: 0 auto;
+    }
