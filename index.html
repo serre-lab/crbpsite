@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Stable and expressive recurrent vision models">
+    <meta name="keywords" content="Brown,Vision,CRBP,steady state,recurrence,RNN,Computer Science">
+    <title>C-RBP</title>
+    <link rel="stylesheet" href="crbp_files/main.css">
+    <style type="text/css">
+    .layered-paper-big {
+        /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+            0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+            /* The top layer shadow */
+            5px 5px 0 0px #fff,
+            /* The second layer */
+            5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+            /* The second layer shadow */
+            10px 10px 0 0px #fff,
+            /* The third layer */
+            10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+            /* The third layer shadow */
+            15px 15px 0 0px #fff,
+            /* The fourth layer */
+            15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+            /* The fourth layer shadow */
+            20px 20px 0 0px #fff,
+            /* The fifth layer */
+            20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+            /* The fifth layer shadow */
+            25px 25px 0 0px #fff,
+            /* The fifth layer */
+            25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+        /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+    }
+    </style>
+    <style id="style-1-cropbar-clipper">
+    /* Copyright 2014 Evernote Corporation. All rights reserved. */
+    .en-markup-crop-options {
+        top: 18px !important;
+        left: 50% !important;
+        margin-left: -100px !important;
+        width: 200px !important;
+        border: 2px rgba(255, 255, 255, .38) solid !important;
+        border-radius: 4px !important;
+    }
+
+    .auth-name {
+        color: #931F21;
+    }
+
+    .email {
+        color: #931F21;
+    }
+
+    .rowimg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .columnimg {
+        display: inline-block;
+        padding: 5px;
+        margin: 10px;
+
+    }
+
+    .masonry-ite {
+        margin-bottom: 10px;
+        width: 20%;
+
+    }
+
+    .masonry-cont {
+margin: 0 auto;
+    }
+
+    .en-markup-crop-options div div:first-of-type {
+        margin-left: 0px !important;
+    }
+    </style>
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <div class="outercontainer">
+        <div class="container">
+            <div class="content project_title">
+                <h1>Stable and expressive recurrent vision models</h1>
+            </div>
+            <div class="content project_headline">
+                <center>
+                    <h2>
+                        <table width="100%" align="center">
+                            <tbody>
+                                <tr>
+                                    <td width="20%" align="center">
+                                        <center>
+                                            <span class="auth-name">Drew Linsley*</a></span><br><span style="font-size:15px">Brown University</span><br><span style="font-size:15px;"><a style="color:#931F21" href="mailto:drew_linsley@brown.edu">{drew_linsley,</a></span></center>
+                                    </td>
+                                    <td width="20%" align="center">
+                                        <center>
+                                            <span class="auth-name">Alekh K Ashok*</a></span><br><span style="font-size:15px">Brown University</span><br><span style="font-size:15px;"><a style="color:#931F21" href="mailto:alekh_karkada_ashok@brown.edu">alekh_karkada_ashok,</a></span></center>
+                                        </a>
+                                    </td>
+                                    <td width="20%" align="center">
+                                        <center>
+                                            <span class="auth-name">Lakshmi N Govindarajan*</a></span><br><span style="font-size:15px">Brown University</span><br><span style="font-size:15px;"><a style="color:#931F21" href="mailto:lakshmi_govindarajan@brown.edu">lakshmi_govindarajan,</a></span></center>
+                                    </td>
+                                    <td width="20%" align="center">
+                                        <center>
+                                            <span class="auth-name">Rex Liu</a></span><br><span style="    font-size:15px">Brown University</span><br><span style="font-size:15px;"><a style="color:#931F21" href="mailto:rex_liu@brown.edu">rex_liu,</a></span></center>
+                                    </td>
+                                    <td width="20%" align="center">
+                                        <center>
+                                            <span class="auth-name">Thomas Serre</a></span><br><span style="    font-size:15px">Brown University</span><br><span style="font-size:15px;"><a style="color:#931F21" href="mailto:thomas_serre@brown.edu">thomas_serre}@brown.edu</a></span></center>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </h2>
+                </center>
+            </div>
+            <div class="content project_headline">
+                <center>
+                    <h2>
+                        <table width="100%" align="center">
+                            <tbody>
+                                <tr>
+                                    <!--                                     <td width="150px" align="center">
+                                        <center>
+                                            <span style="font-size:18px"></span>
+                                        </center>
+                                    </td> -->
+                                    <td width="200px" align="center">
+                                        <center>
+                                            <span style="font-size:18px">Code <a style="color:#931F21" href="https://github.com/c-rbp"> [GitHub]</a></span>
+                                        </center>
+                                    </td>
+                                    <td width="200px" align="center">
+                                        <center>
+                                            <span style="font-size:18px">arXiv 2020<a style="color:#931F21" href="https://arxiv.org/abs/2005.11362"> [Paper]</a></span>
+                                        </center>
+                                    </td>
+                                    <!--                                     <td width="150px" align="center">
+                                        <center>
+                                            <span style="font-size:18px"></span>
+                                        </center>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </h2>
+                </center>
+            </div>
+            <div class="content project_headline">
+                <div class="img" style="text-align:center">
+                    <img class="img_responsive" src="crbp_files/state_space.png" alt="Teaser" style="margin:auto;max-width:90%">
+                </div>
+                <div class="text">
+                    <p style="font-size:12px;padding-left:20px;padding-right:20px"><b>Figure 1:</b> Recurrent CNNs trained with backpropagation through time (BPTT) have unstable dynamics and forget task information. This pathology is corrected by our Lipschitz Coefficient Penalty (LCP). <b>(a)</b> Visualization of horizontal gated unit (hGRU) state spaces. Models were trained on Pathfinder-14, and state spaces were visualized by projecting hidden states onto each model's top-two eigenvectors. Grey dots are the 2D-histogram of projected hidden states, red contours are hidden state densities up to the task-optimized N steps, and blue contours are hidden state densities beyond that point (t>N, for 40 steps). Exemplar dynamics for a single image are plotted in yellow. While dynamics of the BPTT-trained model diverge when t>N, models trained with LCP did not. We refer to the learning algorithms of LCP-trained models as contractor-BPTT (C-BPTT) and contractor-RBP (C-RBP). <b>(b)</b> Model dynamics are reflected in their performance on Pathfinder-14. Segmentations evolve over time, as depicted by the colormap. While the BPTT-trained hGRU is accurate at N steps (red box), it fails when asked to process for longer (t=T=40, blue box). <b>(c)</b> Two-sample KS-tests indicate that the distance in state space between t=N and t=T hidden states is significantly greater for an hGRU trained with BPTT than an hGRU trained with C-BPTT or C-RBP. (n.s. = not significant).</p>
+                </div>
+            </div>
+            <div class="content">
+                <div class="text" style="font-size:18px;padding-left:10px;padding-right:10px">
+                    <h3>Abstract</h3>
+                    <p>There is consensus that recurrent processes support critical visual routines in primate vision, from perceptual grouping to object recognition. These findings are consistent with a growing body of literature suggesting that recurrent connections improve generalization and learning efficiency on classic computer vision challenges. Why then, are current challenges dominated by feedforward networks? We posit that the effectiveness of recurrent vision models is bottlenecked by the widespread algorithm used for training them, "back-propagation through time" (BPTT), which has O(N) memory-complexity for training an N step model. Because of this, recurrent vision models cannot rival the enormous capacity of leading feedforward networks, nor compensate for this deficit by learning granular and complex visual routines. Here, we develop a new learning algorithm, "contractor recurrent back-propagation" (C-RBP), which achieves constant O(1) memory-complexity. We demonstrate that recurrent vision models trained with C-RBP learn long-range spatial dependencies in a synthetic contour tracing task that BPTT-trained models cannot. We further demonstrate that the leading feedforward approach to the large-scale Panoptic Segmentation MS-COCO challenge is improved when augmented with recurrent connections and trained with C-RBP. C-RBP is a general-purpose learning algorithm for any application that can benefit from expansive recurrent dynamics.
+                    </p>
+                </div>
+            </div>
+            <div class="content">
+                <div class="text" style="font-size:18px;padding-left:5px;padding-right:5px">
+                    <h3>Contributions</h3>
+                    <div class="text">
+                        <p><b> (1) </b> We derive a constraint for training recurrent CNNs that are both stable and expressive. We refer tothis as the Lipschitz Constant Penalty (LCP).</p>
+                    </div>
+                    <div class="text">
+                        <p><b> (2) </b> We combine LCP with RBP to introduce "contractor-RBP" (C-RBP), a learning algorithm forrecurrent CNNs with constant memory complexity w.r.t. steps of processing. </p>
+                    </div>
+                    <div>
+                        <div class="text">
+                            <p><b> (3) </b> Recurrent CNNs trained with C-RBP learn difficult versions of Pathfinder that BPTT-trained models cannot due to memory constraints, generalize better to out-of-distribution exemplars, and need a fraction of the parameters of BPTT-trained models to reach high performance.</p>
+                            <div class="img" style="text-align:center">
+                                <img class="img_responsive" src="crbp_files/pf_results.png" alt="Teaser" style="margin:auto;max-width:70%">
+                            </div>
+                            <div class="text">
+                                <p style="font-size:12px;padding-left:20px;padding-right:20px"><b>Figure 2:</b> Enforcing contraction in recurrent CNNs improves their performance, parameter efficiency, and enables our constant-memory C-RBP learning algorithm. <b> (a) </b> hGRU models were trained andtested on different versions of Pathfinder. Only the version trained with C-RBP, trained for 20 steps, maintained high performance across the three datasets. <b>(b)</b> C-RBP models can rely on recurrent processing rather than spatially broad kernels to solve long-range spatial dependencies. BPTT -trained models cannot practically do this due to their linear memory complexity. <b>(c)</b> LCP improves the stability of hGRU dynamics and, as a result, the generalization of learned visual routines for contour integration. Models were trained on Pathfinder-14, and tested on all three Pathfinder datasets. hGRUs trained with C-RBP and C-BPTT generalized far better than a version trained with BPTT or a 6-layer CNN control. Numbers above each curve denote the max-performing step.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text">
+                            <p><b> (4) </b> C-RBP alleviates the memory bottleneck faced by recurrent CNNs on large-scale computer vision.Our C-RBP trained recurrent model outperforms the leading feedforward approach to the MS-COCO Panoptic Segmentation challenge despite using nearly 800K fewer parameters, and withoutexceeding the memory capacity of a standard NVIDIA Titan X GPU. </p>
+                            <div class="img" style="text-align:center">
+                                <img class="img_responsive" src="crbp_files/coco_results.png" alt="Teaser" style="margin:auto;max-width:70%">
+                            </div>
+                            <div class="text">
+                                <p style="font-size:12px;padding-left:20px;padding-right:20px"><b>Figure 3:</b> C-RBP trained recurrent vision models outperform the feedforward standard on MS-COCOPanoptic Segmentation despite using nearly 800K fewer parameters. <b>(a)</b> Performance of our recurrentFPN-ResNet 50 trained with C-RBP improves when trained with more steps of processing, despiteremaining constant in its memory footprint. <b>(b)</b> Recurrent processing refines instance segmentationsand controls false detections of the standard feedforward architecture (additional examples in SI). <b>(c)</b> Panoptic segmentation timecourses for an FPN-ResNet 50 trained with C-RBP for 20 steps.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="text">
+                    <h3>Pathfinder outputs</h3>
+                </div>
+            </div>
+            <div class="rowimg" style="padding-left:5px;padding-right:5px">
+                <figure class="columnimg">
+                    <img src="crbp_files/tt_nopen.gif" alt="nopenalty" style="">
+                    <figcaption style="font-size:12px;text-align: center;">Output of <b>BPTT </b>trained model<br> degrades after the T
+                        steps<br> it is trained for.</figcaption>
+                </figure>
+                <figure class="columnimg">
+                    <img src="crbp_files/tt_pen.gif" alt="penalty" style="">
+                    <figcaption style="font-size:12px;text-align: center"> Output of <b>C-BPTT </b>trained model<br> reaches steady state at T<br>
+                        and doesn't degrade.</figcaption>
+                </figure>
+            </div>
+            <div class="content">
+                <div class="text">
+                    <h3>COCO outputs</h3>
+                </div>
+            </div>
+            <div id="masonry" class="masonry-cont">
+                <img class="masonry-ite" src="crbp_files/11051.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/457559.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/51610.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/70739.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/96549.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/125405.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/169076.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/237118.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/257370.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/304560.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/337055.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/342971.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/350405.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/431848.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/474078.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/535523.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/537053.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/577182.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/252701.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/367818.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/501005.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/269113.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/501005.gif" alt="cocogif">
+                <img class="masonry-ite" src="crbp_files/551804.gif" alt="cocogif">
+            </div>
+            <script src="crbp_files/masonry.pkgd.min.js"></script>
+            <script>
+            var container = document.querySelector('#masonry');
+            var masonry = new Masonry(container, {
+                columnWidth: 50,
+                itemSelector: '.masonry-ite',
+                fitWidth: true
+            });
+            </script>
+            <div class="content">
+                <div class="text">
+                    <h3>Publication</h3>
+                    <ul>
+                        <li>
+                            <div class="title"><a>Stable and expressive recurrent vision models</a></div>
+                            <div>
+                                <a>Drew Linsley*</a>,
+                                <a>Alekh K Ashok*</a>,
+                                <a>Lakshmi N Govindarajan*</a>,
+                                <a>Rex Liu</a>,
+                                <a>Thomas Serre</a>
+                                (*indicates equal contribution)
+                            </div>
+                            <div>
+                                <span class="tag"><a href="https://arxiv.org/abs/2005.11362">arXiv</a></span>
+                                <span class="tag"><a href="https://github.com/c-rbp">code</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text" style="text-align:left">
+                    <table px="" width="200" align="center">
+                        <tbody>
+                            <tr>
+                                <td><a href="https://arxiv.org/abs/2005.11362"><img class="layered-paper-big" style="height:175px" src="crbp_files/paper_thumb.png"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="content">
+                    <div class="text" style="margin: 30px;font-size:8px;">
+                        <p>Website adapted from https://people.csail.mit.edu/yuewang/projects/rfs/
+                        </p>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div id="download_plus_animation"></div>
+</body>
+
+</html>
