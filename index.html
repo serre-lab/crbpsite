@@ -79,7 +79,7 @@
     }
 
     .masonry-cont {
-margin: 0 auto;
+        margin: 0 auto;
     }
 
     .en-markup-crop-options div div:first-of-type {
@@ -230,14 +230,13 @@ margin: 0 auto;
                     <h3>COCO outputs</h3>
                 </div>
             </div>
-            <div id="masonry" class="masonry-cont">
+            <!--             <div id="masonry" class="masonry-cont">
                 <img class="masonry-ite" src="crbp_files/11051.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/457559.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/51610.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/70739.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/96549.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/125405.gif" alt="cocogif">
-                
                 <img class="masonry-ite" src="crbp_files/237118.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/257370.gif" alt="cocogif">
                 <img class="masonry-ite" src="crbp_files/304560.gif" alt="cocogif">
@@ -264,6 +263,86 @@ margin: 0 auto;
                 itemSelector: '.masonry-ite',
                 fitWidth: true
             });
+            </script> -->
+            <div class="slideshow-container">
+                <img class="mySlides fade gifs" src="crbp_files/51610.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/11051.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/457559.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/70739.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/96549.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/125405.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/237118.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/257370.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/304560.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/337055.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/342971.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/350405.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/431848.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/474078.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/535523.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/537053.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/577182.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/252701.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/367818.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/53626.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/269113.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/501005.gif" alt="cocogif">
+                <img class="mySlides fade gifs" src="crbp_files/551804.gif" alt="cocogif">
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+                <span class="dot" onclick="currentSlide(7)"></span>
+                <span class="dot" onclick="currentSlide(8)"></span>
+                <span class="dot" onclick="currentSlide(9)"></span>
+                <span class="dot" onclick="currentSlide(10)"></span>
+                <span class="dot" onclick="currentSlide(11)"></span>
+                <span class="dot" onclick="currentSlide(12)"></span>
+                <span class="dot" onclick="currentSlide(13)"></span>
+                <span class="dot" onclick="currentSlide(14)"></span>
+                <span class="dot" onclick="currentSlide(15)"></span>
+                <span class="dot" onclick="currentSlide(16)"></span>
+                <span class="dot" onclick="currentSlide(17)"></span>
+                <span class="dot" onclick="currentSlide(18)"></span>
+                <span class="dot" onclick="currentSlide(19)"></span>
+                <span class="dot" onclick="currentSlide(20)"></span>
+                <span class="dot" onclick="currentSlide(21)"></span>
+                <span class="dot" onclick="currentSlide(22)"></span>
+                <span class="dot" onclick="currentSlide(23)"></span>
+            </div>
+            <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
             </script>
             <div class="content">
                 <div class="text">
@@ -297,11 +376,11 @@ margin: 0 auto;
                 </div>
             </div>
             <div class="content">
-                    <div class="text" style="margin: 30px;font-size:8px;">
-                        <p>Website adapted from https://people.csail.mit.edu/yuewang/projects/rfs/
-                        </p>
-                    </div>
+                <div class="text" style="margin: 30px;font-size:8px;">
+                    <p>Website adapted from https://people.csail.mit.edu/yuewang/projects/rfs/
+                    </p>
                 </div>
+            </div>
         </div>
     </div>
     <div id="download_plus_animation"></div>
